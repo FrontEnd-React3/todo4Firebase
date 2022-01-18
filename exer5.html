@@ -81,14 +81,8 @@
             </div>
             <div class="todo-items-info">
                 <div class="items-left">
-                    <script>
-                        db.collection("todo-items").get().then(snap => {
-                            size = snap.size // will return the collection size;
-                            console.log("snap.size" + size);
-                            document.getElementById("demo").innerHTML = size;
-                        });
-                    </script>
-                    <span id="demo"></span> items left
+                 
+                    <span id="counter"></span> items left
                 </div>
                 <div class="items-statuses">
                     <span>All</span>

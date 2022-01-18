@@ -6,6 +6,7 @@ function addItem(event) {
     status: "active"
   });
   text.value = "";
+  countAll();
 }
 
 function getItems() {
@@ -20,12 +21,13 @@ function getItems() {
   });
 }
 function countAll() {
-                      <script>
-                        db.collection("todo-items").get().then(snap => {
-                            size = snap.size // will return the collection size;
-                            console.log("snap.size" + size)
-                        })
-                    </script>
+  console.log("runningcountAll");
+  db.collection("todo-items")
+    .get()
+    .then(snap => {
+      size = snap.size;
+      document.getElementById("counter").innerHTML = size;
+    });
 }
 function generateItems(items) {
   let itemsHTML = "";
@@ -91,8 +93,7 @@ function createEventListeners() {
 function deleteOne(id) {
   let item = db.collection("todo-items").doc(id);
   item.delete();
-  // alert('deleted'+ JSON.stringify(db.collection("todo-items").doc(id)))
-  alert(item + id);                        
+  countAll();
 }
 function markCompleted(id) {
   let item = db.collection("todo-items").doc(id);
@@ -118,8 +119,9 @@ function compDeleter() {
     querySnapshot.forEach(function (doc) {
       doc.ref.delete();
     });
+    countAll();
   });
-  console.log("itemMC" + JSON.stringify(item));
 }
 
 getItems();
+countAll();
